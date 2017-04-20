@@ -1,0 +1,457 @@
+\documentclass[12pt, oldfontcommands]{article}
+\usepackage[brazilian, brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[top = 2cm, left = 2cm, right = 2cm, bottom = 2cm]{geometry}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{breqn}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\setlength\parindent{0pt}
+\newcommand{\eqnb}{\begin{equation}}
+\newcommand{\eqne}{\end{equation}}
+\newcommand{\eqnbs}{\begin{equation*}}
+\newcommand{\eqnes}{\end{equation*}}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+\title{  
+ \normalfont \normalsize 
+ \textsc{MI404 - Métodos Estatísticos} \\
+ Mariana Rodrigues Motta \\
+ Departamento de Estatística, Universidade de Campinas (UNICAMP) \\ [25pt]
+ \horrule{.5pt} \\ [.4cm]
+ \LARGE PROVA 1 \\
+  - \\
+  EXERCÍCIOS
+ \horrule{2pt} \\[ .5cm]}
+ 
+\author{Henrique Aparecido Laureano}
+\date{\normalsize Abril de 2017}
+
+\begin{document}
+
+\maketitle
+
+\vspace{\fill}
+
+\tableofcontents
+
+\horrule{1pt} \\
+
+\newpage
+
+<<setup, include=FALSE>>=
+# <code r> ============================================================= #
+library(knitr)
+
+tema <- knit_theme$get("acid")
+
+knit_theme$set(tema)
+
+opts_chunk$set(size='small'
+               , cache=TRUE
+               , cache.path='cache/'
+               , comment=NA
+               , warning=FALSE
+               , message=FALSE
+               , fig.align='center'
+               , dpi=100
+               , fig.path='iBagens/'
+               , fig.pos='H'
+               , background='#ffffff'
+               , results='hold'
+               , fig.show='hold'
+               , echo=FALSE)
+# </code r> ============================================================ #
+@
+
+\section*{Exercício 1} \addcontentsline{toc}{section}{Exercício 1}
+
+\horrule{1pt} \\
+
+\textbf{Considere uma variável aleatória \(X\) = consumo (em gramas) de
+        vegetais de \(n\) = 188 indivíduos. A seguir considere o gráfico
+        abaixo e responda.}
+
+\vspace{\fill}
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = .65\textwidth]{exer1.png}
+ \caption{Histograma do consumo de vegetais (em gramas).}
+ \label{fig:exer1}
+\end{figure}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{O que você observa sobre o histograma acima?} \\
+
+\quad
+Observa-se inicialmente que o consumo de vegetais dos indivíduos sob
+estudo varia de O à 400 gramas, com maior concentração entre 50 e 100
+gramas. Este intervalo de maior concentração apresenta mais que o dobro de
+indivíduos que o segundo intervalo com maior frequência de consumo
+(intervalo 100 à 150 gramas). Feita esta observações, podemos afirmar que
+o consumo de vegetais destes indivíduos segue uma distribuição unimodal
+(com uma única moda).
+     
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{O que significa a escala do eixo \(y\) ser chamada de
+        densidade?} \\
+        
+\quad
+Significa que a escala do histograma apresentado é dada em densidade de
+probabilidade, desta modo, o histograma tem uma área total de um.
+
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Neste exemplo, quem será maior: a média ou a mediana? 
+        Justifique. \\
+        Considere \(\bar{X}\) = 87.2 e \(S\) = 49.14, em que \(\bar{X}\) é
+        a média amostral e \(S\) o desvio padrão amostral.} \\
+
+\quad
+Este histograma apresenta assimetria a direita (cauda direita mais longo e
+fina), e em histogramas com tal característica a média é maior que a
+mediana. Isso é dado pelo fato do conjunto de dados possuir poucas
+observações com valores altos que aumentam a média mas que não afetam a
+localização do meio exato do conjunto de dados (i.e., a mediana). \\
+     
+Para ter uma noção da mediana, \(\tilde{x}\), podemos usar a seguinte
+inequação:
+       
+\[ \text{max}(x_{(1)}, \bar{x} - s_{n}) \leq \tilde{x} < \bar{x}, \]
+
+em que
+
+\[ s_{n} = \sqrt{\frac{n - 1}{n}} s_{n - 1}. \]
+
+O menor valor da amostra é \(x_{1}\), o desvio padrão viesado da amostra é
+\(s_{n}\) e o desvio padrão não viesado é \(s_{n - 1}\). \\
+
+Assim, \(\text{max}(0, 87.2 - \sqrt{187/188} \cdot 49.14)
+         \leq \tilde{x} <
+         87.2 \rightarrow
+         \Sexpr{round(max(0, 87.2 - sqrt(187/188) * 49.14), 2)}
+         \leq \tilde{x} < 87.2\).
+
+\subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}            
+
+\textbf{Sabendo que '\textit{skewness} é uma medida de assimetria de uma
+        determinada distribuição de frequência' e que na distribuição
+        normal a \textit{skewness} é zero, a estimativa da
+        \textit{skewness} da distribuição dos dados apresentados no
+        histograma acima deve ser positiva, negativa ou zero?
+        Justifique. \\
+        Note que \textit{skewness} = \(\mu_{3}/\sigma^{3}\), em que
+        \(\mu_{3} = E[(X - E(X))^{3}]\) e \(\sigma\) é o desvio padrão
+        populacional. Aproximadamente 60\% das observações estão abaixo da
+        média.} \\
+
+\quad
+Estamos numa situação em que a mediana é menor que a média, desta forma, a
+\textit{skewness} da distribuição dos dados é positiva. \\
+A \textit{skewness} pode ser mensurada por
+
+\[ \text{Skew} = 3 \cdot \frac{\bar{x} - \tilde{x}}{s_{n-1}}. \]
+
+Como sabemos que a média é maior que a mediana, \(\bar{x} > \tilde{x}\), a
+\textit{skewness} será maior que zero, Skew > 0.
+
+\subsection*{(e)} \addcontentsline{toc}{subsection}{(e)}
+
+\textbf{As distribuições lognormal e gama seriam duas candidatas para
+        ajustar esses dados. Usando métodos computacionais e gráficos,
+        como você escolheria a mais apropriada? Justifique.} \\
+
+\quad
+Pensando em ajuste de modelos de regressão, poderíamos ajustar dois
+modelos lineares generalizados, um com resposta lognormal e outro com
+resposta gama. O modelo com melhor ajuste, baseado numa análise de
+resíduos, responderia a pergunta de qual distribuição é mais adequada aos
+dados. \\
+
+Não pensando em ajuste de modelos de regressão, dois gráficos poderiam ser
+feitos pra responder essa pergunta. Um \texttt{q-q plot} que compararia as
+duas funções de distribuição através da comparação gráfica dos quantis das
+distribuições. Esse gráfico ajudaria na visualização de diferenças nas
+caudas das distribuições. O outro gráfico útil seria um gráfico normal de
+probabilidade que representaria a comparação dos quantis de cada
+distribuição com uma normal padrão. Tal gráfico também seria válido na
+comparação das caudas das distribuições. \\
+
+Na Figura \ref{fig:exer1s} temos a aplicação desses dois gráficos em duas
+amostras simuladas de tamanho 188 das distribuições lognormal e gama com
+igual média, 90, e desvio padrão, 50. Na comparação das distribuições
+observamos uma grande fuga na calda direita da distribuição lognormal. \\
+
+Pensando no conjunto de dados do exercício e olhando para os resultados
+dos gráficos, escolheríamos a distribuição lognormal como mais apropriada,
+já que seus dados simulados apresentam a mesma característica dos dados
+originais.
+
+<<exer1s, fig.cap='q-q plot e gráficos normais de probabilidade para duas amostras simuladas de tamanho 188 de distribuições lognormal e gama de igual média, 90, e desvio padrão, 50.', fig.width=10, fig.height=3.5>>=
+# <code r> ============================================================= #
+ln <- rlnorm(180, log(90) - .5 * log(50), sqrt(log(50)))
+
+ga <- rgamma(180, shape = (90**2)/50, rate = 90/50)
+
+library(latticeExtra)
+
+print(
+  xyplot(sort(ga) ~ sort(ln)
+         , pch = 16, xlab = "Lognormal", ylab = "Gama", main = "q-q plot")
+  , position = c(1/3, 0, 2/3, 1), more = TRUE)
+
+print(qqmath(ln, pch = 16, xlab = NULL, ylab = ""
+             , main = "Gráfico normal de probabilidade:\nLognormal")
+      , position = c(0, 0, 1/3, 1), more = TRUE)
+
+print(qqmath(ga, pch = 16, xlab = NULL, ylab = ""
+             , main = "Gráfico normal de probabilidade:\nGama")
+      , position = c(2/3, 0, 1, 1))
+# </code r> ============================================================ #
+@
+
+\section*{Exercício 2} \addcontentsline{toc}{section}{Exercício 2}
+
+\horrule{1pt} \\
+
+\textbf{Seja \(X\) uma variável aleatória de distribuição gama com 
+        parâmetros \(a\) e \(b\) dada por}
+
+\begin{equation}
+ \label{eq:exer2}
+ f(x; a, b) = \frac{b}{\Gamma(a)} (bx)^{a - 1} e^{-bx},
+\end{equation}
+
+\textbf{tal que \(E(X) = a/b\) e \(Var(X) = a/b^{2}\). Reparametrize a
+        distribuição em (\ref{eq:exer2}) de tal forma que \(E(X) = \mu\) e
+        \(Var(X) = \mu/\phi\). Escreva a distribuição em (\ref{eq:exer2})
+        a partir desta nova parametrização.}
+
+\[ \mu = \frac{a}{b}
+   \qquad \text{e} \qquad
+   \frac{\mu}{\phi} = \frac{a}{b^{2}}, \]
+
+logo,
+
+\[ a = \mu b
+   \qquad \text{e} \qquad
+   \frac{\mu}{\phi} = \frac{\mu b}{b^{2}} = \frac{\mu}{b}
+   \Rightarrow \boxed{\phi = b}
+   \qquad \text{e} \qquad \boxed{a = \mu \phi}. \]
+
+\[ \boxed{f(x; \mu, \phi) = \frac{\phi}{\Gamma(\mu \phi)}
+                            (\phi x)^{\mu \phi - 1} e^{-\phi x}}. \]
+
+\section*{Exercício 3} \addcontentsline{toc}{section}{Exercício 3}
+
+\horrule{1pt} \\
+
+\textbf{Suponha que indivíduos entrevistados sobre o consumo de vegetais
+        informem consumos positivos ou zero (sem consumo) e que você tenha
+        decidido pela distribuição gama para modelar os dados de consumo
+        de vegetais positivos. Escreva uma distribuição de probabilidade
+        para estes dados, considerando que \(f(x)\) é a distribuição gama
+        em (\ref{eq:exer2}) com parâmetros \(\mu\) e \(\phi\), onde
+        \(\mu\) é a média e \(\phi\) parâmetro de escala. Para construir a
+        distribuição de probabilidade dos dados positivos e zeros use a
+        idéia do modelo ZIP visto em sala de aula.}
+
+\begin{align*}
+P(X = x) &= \begin{cases}
+             p & \text{ ; } x = 0 \\
+             (1 - p) f(x; \mu, \phi) & \text{ ; } x \in (0, \infty)
+            \end{cases}, \\
+\\
+\text{ZIG}(x; p, \mu, \phi) &=
+ p^{\text{ I}(x = 0)}
+ \left[(1-p) f(x; \mu, \phi)\right]^{\text{ I}(x > 0)}.
+\end{align*}
+
+ZIG: \textit{Zero-Inflated Gamma}. \\
+
+Em que \(p\) é a probabilidade de ter consumo de vegetais.
+
+\section*{Exercício 4} \addcontentsline{toc}{section}{Exercício 4}
+
+\horrule{1pt} \\
+
+\textbf{Considere uma normal tetravariada originada da seguinte forma:}
+
+\begin{align}
+ \label{eq:exer4}
+ y_{1} &= a_{1} + e_{1} \\
+ y_{2} &= a_{2} + e_{2} \nonumber
+\end{align}
+
+\textbf{em que \(E(a_{i}) = E(e_{i}) = 0\), \(Cov(a_{i}, e_{j}) = 0\),
+        para \(i, j = 1, 2\). Além disso, assuma que
+        \(Cov(e_{i}, e_{j}) = 0\), \(i \neq j\),
+        \(Var(a_{i}) = \sigma_{a}^{2}\) e \(Var(e_{i}) = \sigma_{e}^{2}\),
+        \(i, j = 1, 2\). Assuma que a distribuição de \(a_{i}\) e
+        \(e_{i}\) seja normal.} 
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Qual a distribuição do vetor
+        \(\textbf{d} = (y_{1}, y_{2}, a_{1}, a_{2})\)?}
+
+\[ D = \begin{bmatrix}
+        y_{1} \\
+        y_{2} \\
+        a_{1} \\
+        a_{2}
+       \end{bmatrix} = \begin{bmatrix}
+                        a_{1} + e_{1} \\
+                        a_{2} + e_{2} \\
+                        a_{1} \\
+                        a_{2}
+                       \end{bmatrix} \sim N_{4} ( \mu, \Sigma), \]  
+
+em que
+
+\[ \mu = \begin{bmatrix}
+          0 \\
+          0 \\
+          0 \\
+          0
+         \end{bmatrix}, \qquad
+   \Sigma = \begin{bmatrix}
+             \sigma_{a}^{2} + \sigma_{e}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}} \\
+             \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2} + \sigma_{e}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2} \\
+             \sigma_{a}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}} \\
+             \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2}
+             & \rho_{a_{1} a_{2}} \sigma_{a_{1}} \sigma_{a_{2}}
+             & \sigma_{a}^{2}
+            \end{bmatrix}.
+\]
+
+Outra maneira de representar:
+
+\[ D = \begin{bmatrix}
+        y_{1} \\
+        y_{2} \\
+        a_{1} \\
+        a_{2}
+       \end{bmatrix} = \begin{bmatrix}
+                        a_{1} + e_{1} \\
+                        a_{2} + e_{2} \\
+                        a_{1} \\
+                        a_{2}
+                       \end{bmatrix} = \underset{A}{\underbrace{
+                                        \begin{bmatrix}
+                                         1 & 0 & 1 & 0 \\
+                                         0 & 1 & 0 & 1 \\
+                                         1 & 0 & 0 & 0 \\
+                                         0 & 1 & 0 & 0
+                                        \end{bmatrix}
+                                       }} \underset{X}{\underbrace{
+                                           \begin{bmatrix}
+                                            a_{1} \\
+                                            a_{2} \\
+                                            e_{1} \\
+                                            e_{2}
+                                           \end{bmatrix}
+                                          }} = A X, \]
+
+\[ A X \sim N_{4} ( A \mu, A \Sigma A^{'}). \]
+
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{Usando a ideia de probabilidade condicional, mostre como encontrar
+        a distribuição \(p(y_{1}, y_{2} | a_{1}, a_{2})\). Pode deixar
+        indicado quando tiver alcançado uma resposta que depende das
+        distribuições conhecidas no problema.}
+
+\[ p(y_{1}, y_{2} | a_{1}, a_{2}) =
+    \frac{p(y_{1}, y_{2}, a_{1}, a_{2})}{p(a_{1}, a_{2})} =
+    \frac{p(y_{1}, y_{2}, a_{1}, a_{2})}{
+     \int \int p(y_{1}, y_{2}, a_{1}, a_{2})\text{d} y_{1} \text{d} y_{2}}
+   .
+\]
+
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Encontre \(E(y_{i})\) e \(Var(y_{i})\) usando o método da
+        iteração a partir da \(E(y_{i} | a_{i}) = a_{i}\) e
+        \(Var(y_{i} | a_{i}) = \sigma_{e}^{2}\). Mostre que
+        \(E(y_{i}) = 0\) e
+        \(Var(y_{i}) = \sigma_{a}^{2} + \sigma_{e}^{2}\).}
+
+\[ E(y_{i}) = E_{a_{i}}[E(y_{i} | a_{i})] = E_{a_{i}}[a_{i}] = 0. \]
+
+\begin{align*}
+ Var(y_{i}) &=
+  E_{a_{i}}[Var(y_{i} | a_{i})] + Var_{a_{i}}[E(y_{i} | a_{i})] \\
+            &= E_{a_{i}}[\sigma_{e}^{2}] + Var_{a_{i}}[a_{i}] \\
+            &= \sigma_{e}^{2} + \sigma_{a}^{2}.
+\end{align*}
+
+\section*{Exercício 5} \addcontentsline{toc}{section}{Exercício 5}
+
+\horrule{1pt} \\
+
+\textbf{Considere o seguinte mecanismo de amostragem: (1) Jogue uma moeda
+        em que a probabilidade de ser 'cara' é 0.3; (2) Se você observa
+        cara, considere uma realização \(X \sim N(2, 1)\); se for 'coroa'
+        considere uma realização \(X \sim N(8, 1)\). O código abaixo
+        ilustra este experimento a partir de simulação:}
+
+<<echo=TRUE>>=
+# <code r> ============================================================= #
+coin <-
+  rbinom(1000
+         , size = 1, prob = 0.3) # gera 1000 amostras de uma v.a. Ber(0.3)
+n1 <- rnorm(sum(coin), 2, 1) # gera um total de soma(coin) de N(2, 1)
+n2 <- rnorm(1000 - sum(coin)
+            , 8, 1) # gera um total de [1000 - soma(coin)] de N(8, 1)
+# </code r> ============================================================ #
+@
+
+\textbf{O histograma destas 1000 amostras é dado por}
+
+\vspace{\fill}
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = .485\textwidth]{exer5.png}
+ \caption{Histograma das 1000 v.a.'s geradas pelo processo acima.}
+ \label{fig:exer5}
+\end{figure}
+
+\textbf{Considere que uma v.a. \(X\) gerada através do processo acima.
+        Escreva a distribuição de probabilidade de \(X\).}
+
+\[f_{X | \theta}(x; \theta) =
+   [0.3 \cdot N(2, 1)]^{\text{I}(\theta = 0)}
+   \cdot
+   [0.7 \cdot N(8, 1)]^{\text{I}(\theta = 1)}, \]
+
+Em que \(\theta\) é o resultado de jogar a moeda (cara = 0, coroa = 1). \\
+
+\horrule{.5pt}
+
+\vspace{\fill}
+
+\horrule{1pt} \\
+
+\end{document}
