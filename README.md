@@ -10,3 +10,7 @@
 Professor: [**Prof. PhD Mariana Rodrigues Motta**](http://www.ime.unicamp.br/~marianar/)
 
 ***
+
+[**Assignment for test 1)**](http://mynameislaure.github.io/mi404/p1.pdf)
+
+***
