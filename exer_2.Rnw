@@ -1,0 +1,655 @@
+\documentclass[12pt, oldfontcommands]{article}
+\usepackage[brazilian, brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage[top = 2cm, left = 2cm, right = 2cm, bottom = 2cm]{geometry}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{breqn}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\setlength\parindent{0pt}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+\title{  
+ \normalfont \normalsize 
+ \textsc{MI404 - Métodos Estatísticos} \\
+ Mariana Rodrigues Motta \\
+ Departamento de Estatística, Universidade de Campinas (UNICAMP) \\[25pt]
+ \horrule{.5pt} \\ [.4cm]
+ \LARGE EXERCÍCIOS \\
+  2
+ \horrule{2pt} \\[ .5cm]}
+ 
+\author{Henrique Aparecido Laureano}
+\date{\normalsize Maio de 2017}
+
+\begin{document}
+
+\maketitle
+
+\vspace{\fill}
+
+\tableofcontents
+
+\horrule{1pt} \\
+
+\newpage
+
+\section*{Exercício 1} \addcontentsline{toc}{section}{Exercício 1}
+
+\horrule{1pt} \\
+
+\textbf{Considere o seguinte modelo linear}
+
+\begin{equation}
+ \mathbf{y} = \mathbf{X} \bm{\beta} + \bm{\epsilon},
+ \label{eq:exer1_1}
+\end{equation}
+
+\textbf{em que \(\bm{\epsilon} \sim N(\mathbf{0},
+                 \sigma_{e}^{2}\mathbf{I}_{n \times n})\). Seja 
+        \(\mathbf{X}\) uma matriz de desenho de dimensão \(n \times p\),
+        \(\bm{\beta}\) um vetor de parâmetros de dimensão
+        \(p \times 1\).}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Encontre o EMV de \(\bm{\beta}\) e \(\sigma_{e}^{2}\) e usando a
+        verossimilhança baseada na distribuição multivariada de   
+        \(\mathbf{y}\).} \\
+
+\textbf{Nota. Seja \(\mathbf{V}\) um vetor aleatório de dimensão
+        \(n \times 1\), tal que
+        \(\mathbf{V} \sim N(\bm{\mu}, \bm{\Sigma})\), com
+        \(\bm{\Sigma}\) positiva definida. Então}
+
+\begin{equation}
+ f(\mathbf{v}, \bm{\mu}, \bm{\Sigma}) =
+ (2 \pi)^{-n/2} |\bm{\Sigma}|^{-1/2} {\rm exp}\Big\{-\frac{1}{2}
+ (\mathbf{v} - \bm{\mu})^{'} \bm{\Sigma}^{-1} (\mathbf{v} - \bm{\mu})
+ \Big\}.
+ \label{eq:exer1_2}
+\end{equation}
+
+\underline{Solução:} \\
+
+Aqui, \(\bm{\theta} = (\bm{\beta}, \sigma_{e}^{2})\),
+\(\bm{\mu} = \mathbf{X} \bm{\beta}\) e
+\(\bm{\Sigma} = \sigma_{e}^{2}\mathbf{I}_{n \times n}\). \\
+
+A função de verossimilhança \(L(\bm{\theta}; \mathbf{y})\) é dada por:
+
+\[ L(\bm{\theta}; \mathbf{y}) = (2 \pi)^{-n/2}
+   |\sigma_{e}^{2}\mathbf{I}_{n \times n}|^{-1/2} {\rm exp}\Big\{
+   -\frac{1}{2}
+   (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+   (\sigma_{e}^{2}\mathbf{I}_{n \times n})^{-1}
+   (\mathbf{y} - \mathbf{X} \bm{\beta})\Big\}. \]
+
+Sendo \(\sigma_{e}^{2}\mathbf{I}_{n \times n} = {\sigma_{e}^{2}}^{n}\),
+
+\[ L(\bm{\theta}; \mathbf{y}) \propto \frac{1}{|\sigma_{e}^{2}|^{n/2}}
+   {\rm exp}\Big\{-\frac{1}{2\sigma_{e}^{2}}
+   (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+   (\mathbf{y} - \mathbf{X} \bm{\beta})\Big\}. \]
+
+A função de log-verossimilhança é expressa por:
+
+\begin{align*}
+ {\rm log}(L(\bm{\theta}; \mathbf{y})) & \propto -\frac{n}{2}
+ {\rm log}(\sigma_{e}^{2}) -\frac{1}{2\sigma_{e}^{2}}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta}) \\ & \propto -\frac{n}{2}
+ {\rm log}(\sigma_{e}^{2}) -\frac{1}{2\sigma_{e}^{2}}
+ (\mathbf{y}^{'}\mathbf{y} - 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+ (\mathbf{X}\bm{\beta})^{2}).
+\end{align*}
+
+\(\boxed{\text{EMV de } \bm{\beta}}\) :
+
+\[ \frac{\partial
+   {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \bm{\beta}} = 0 \]
+
+\begin{align*}
+ \frac{\partial
+ {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \bm{\beta}} & =
+ -\frac{1}{2\sigma_{e}^{2}} (-2\mathbf{y}^{'}\mathbf{X} +
+ 2\mathbf{X}^{'}\mathbf{X}\bm{\beta}) \\ & = \frac{1}{\sigma_{e}^{2}}
+ (\mathbf{X}^{'}\mathbf{y} - \mathbf{X}^{'}\mathbf{X}\bm{\beta}).
+\end{align*}
+
+\[ \frac{\partial
+   {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \bm{\beta}} =
+   \frac{1}{\sigma_{e}^{2}}
+   (\mathbf{X}^{'}\mathbf{y} - \mathbf{X}^{'}\mathbf{X}\bm{\beta}) = 0.
+\]
+
+\begin{align*}
+ \frac{1}{\sigma_{e}^{2}}
+ (\mathbf{X}^{'}\mathbf{y} - \mathbf{X}^{'}\mathbf{X}\bm{\beta}) & = 0 
+ \\ \mathbf{X}^{'}\mathbf{y} - \mathbf{X}^{'}\mathbf{X}\bm{\beta} & = 0
+ \\ \mathbf{X}^{'}\mathbf{y} & = \mathbf{X}^{'}\mathbf{X}\bm{\beta}
+\end{align*}
+
+\[\boxed{\hat{\bm{\beta}} =
+         (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{y}.} \]
+
+\(\boxed{\text{EMV de } \sigma_{e}^{2}}\) :
+
+\[ \frac{\partial
+   {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \sigma_{e}^{2}} = 0
+\]
+
+\begin{align*}
+ \frac{\partial
+ {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \sigma_{e}^{2}} & =
+ -\frac{n}{2\sigma_{e}^{2}} + \frac{1}{2(\sigma_{e}^{2})^{2}}
+ (\mathbf{y}^{'}\mathbf{y} - 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+ (\mathbf{X}\bm{\beta})^{2}) \\ & = \frac{-n\sigma_{e}^{2} +
+ (\mathbf{y}^{'}\mathbf{y} - 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+ (\mathbf{X}\bm{\beta})^{2})}{2(\sigma_{e}^{2})^{2}}.
+\end{align*}
+
+\[ \frac{\partial
+   {\rm log}(L(\bm{\theta}; \mathbf{y}))}{\partial \sigma_{e}^{2}} =
+   \frac{-n\sigma_{e}^{2} + (\mathbf{y}^{'}\mathbf{y} -
+   2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+   (\mathbf{X}\bm{\beta})^{2})}{2(\sigma_{e}^{2})^{2}} = 0. \]
+
+\begin{align*}
+ \frac{-n\sigma_{e}^{2} + (\mathbf{y}^{'}\mathbf{y} -
+ 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+ (\mathbf{X}\bm{\beta})^{2})}{2(\sigma_{e}^{2})^{2}} & = 0 \\
+ -n\sigma_{e}^{2} + (\mathbf{y}^{'}\mathbf{y} -
+ 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} + (\mathbf{X}\bm{\beta})^{2}) & = 0
+ \\ \mathbf{y}^{'}\mathbf{y} - 2\mathbf{y}^{'}\mathbf{X}\bm{\beta} +
+ (\mathbf{X}\bm{\beta})^{2} & = n\sigma_{e}^{2} \\
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta}) & = n\sigma_{e}^{2}
+\end{align*}
+
+\[\boxed{\hat{\sigma}_{e}^{2} = \frac{
+         (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+         (\mathbf{y} - \mathbf{X} \bm{\beta})}{n}.} \]
+
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{Encontre a distribuição do EMV \(\hat{\bm{\beta}}\).} \\
+
+\underline{Solução:}
+
+\[ \hat{\bm{\beta}} \underset{\text{aprox.}}{\sim}
+    N(E[\hat{\bm{\beta}}], Var[\hat{\bm{\beta}}]) \]
+
+\begin{multicols}{2}
+\begin{align*}
+ E[\hat{\bm{\beta}}] & =
+ E[(\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{y}] \\ & =
+ (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}E[\mathbf{y}] \\ & =
+ (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}
+ E[\mathbf{X} \bm{\beta} + \bm{\epsilon}] \\ & =
+ (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{X}E[\bm{\beta}] +
+ \mathbf{0} \\ & = (\mathbf{X}^{'}\mathbf{X})^{-1}
+ \mathbf{X}^{'}\mathbf{X}\bm{\beta} \\ & = \bm{\beta}.
+ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+\end{align*}
+
+\columnbreak
+
+\[ Var[\hat{\bm{\beta}}] = \frac{1}{\mathbf{I}(\bm{\beta})}, \qquad
+   \mathbf{I}(\bm{\beta}) = E\bigg[-\frac{\partial^2
+   {\rm log}(L(\bm{\theta};\mathbf{y}))}{\partial \bm{\beta} \partial
+   \bm{\beta}^{'}}\bigg]. \]
+
+Sendo que \(\mathbf{I}(\bm{\beta})\) é a matriz de informação esperada.
+
+\begin{align*}
+ \frac{\partial^2 {\rm log}(L(\bm{\theta};\mathbf{y}))}{\partial
+ \bm{\beta} \partial \bm{\beta}^{'}} & = -\frac{\mathbf{X}^{'}
+ \mathbf{X}}{\sigma_{e}^{2}} \\ \mathbf{I}(\bm{\beta}) & =
+ E\bigg[\frac{\mathbf{X}^{'}\mathbf{X}}{\sigma_{e}^{2}}\bigg] \\
+ \mathbf{I}(\bm{\beta}) & = \frac{\mathbf{X}^{'}\mathbf{X}}{E\Big[
+ \sigma_{e}^{2}\Big]} \\ \mathbf{I}(\bm{\beta}) & =
+ \frac{\mathbf{X}^{'}\mathbf{X}}{\sigma_{e}^{2}}.
+\end{align*}
+
+\begin{align*}
+ Var[\hat{\bm{\beta}}] & =
+ \frac{1}{\mathbf{X}^{'}\mathbf{X}/\sigma_{e}^{2}} \\ & =
+ (\mathbf{X}^{'}\mathbf{X})^{-1}\sigma_{e}^{2}.
+\end{align*}
+\end{multicols}
+
+\[ \boxed{\hat{\bm{\beta}} \underset{\text{aprox.}}{\sim}
+          N\Big(\bm{\beta},
+                (\mathbf{X}^{'}\mathbf{X})^{-1}\sigma_{e}^{2}\Big).} \]
+
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Encontre a distribuição do EMV \(\hat{\sigma}_{e}^{2}\).} \\
+
+\underline{Solução:}
+
+\[ \hat{\sigma}_{e}^{2} \underset{\text{aprox.}}{\sim}
+    N(E[\hat{\sigma}_{e}^{2}], Var[\hat{\sigma}_{e}^{2}]) \]
+
+\begin{align*}
+ E[\hat{\sigma}_{e}^{2}] = E\bigg[\frac{
+ (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})^{'}
+ (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})}{n}\bigg] & = \frac{1}{n}
+ E\Big[(\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})^{'}
+       (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})\Big] \\ & =
+ \frac{1}{n} E\Bigg[\sum_{i = 1}^{n}
+ (y_{i} - \bm{x}_{i}^{'}\hat{\bm{\beta}})^{2}\Bigg] \\ & = \frac{1}{n}
+ E\Bigg[\frac{\sigma^{2}}{\sigma^{2}} \sum_{i = 1}^{n}
+        (y_{i} - \bm{x}_{i}^{'}\hat{\bm{\beta}})^{2}\Bigg] \\ & =
+ \frac{1}{n} \sigma^{2} E\left[\sum_{i = 1}^{n}
+ \Bigg[\frac{(y_{i} - \bm{x}_{i}^{'}\hat{\bm{\beta}})}{\sigma}\Bigg]^{2}
+ \right] = \frac{1}{n} \sigma^{2} E\Big[\chi_{n - p}^{2}\Big].
+\end{align*}
+
+Já que
+
+\[ \sum_{i = 1}^{n} \Bigg[
+   \frac{(y_{i} -\bm{x}_{i}^{'}\hat{\bm{\beta}})}{\sigma}\Bigg]^{2} \sim
+   \chi_{n - p}^{2}, \quad {\rm com} \quad E[\cdot] = n - p \quad
+   {\rm e} \quad Var[\cdot] = 2 (n - p).\]
+
+Assim,
+
+\begin{multicols}{2}
+\begin{align*}
+ E[\hat{\sigma}_{e}^{2}] & = \frac{1}{n} \sigma^{2} (n - p) \\
+                         & = \frac{n - p}{n} \sigma^{2}.
+\\ \\ \\ \\ \\ \\ \\ \\
+\end{align*}
+\begin{align*}
+ Var[\hat{\sigma}_{e}^{2}] & =
+ Var\bigg[\frac{(\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})^{'}
+                (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})}{n}\bigg] \\
+ & = \frac{1}{n^{2}} Var\bigg[
+     \sum_{i = 1}^{n} (y_{i} - \bm{x}_{i}^{'}\hat{\bm{\beta}})^{2}\bigg]
+ \\ & = \frac{1}{n^{2}} \sigma^{4} Var\left[\sum_{i = 1}^{n}
+ \Bigg[\frac{(y_{i} - \bm{x}_{i}^{'}\hat{\bm{\beta}})}{\sigma}\Bigg]^{2}
+ \right] \\ & = \frac{1}{n^{2}} \sigma^{4} 2 (n - p) \\
+ & = \frac{n - p}{n^{2}} 2 \sigma^{4}.
+\end{align*}
+\end{multicols}
+
+\[ \boxed{\hat{\sigma}_{e}^{2} \underset{\text{aprox.}}{\sim}
+          N\bigg(\frac{n - p}{n} \sigma^{2},
+                \frac{n - p}{n^{2}} 2 \sigma^{4}\bigg).} \]
+
+\subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
+
+\textbf{Considere o modelo em (\ref{eq:exer1_1}) com
+        \(\bm{\beta} = \beta_{0}\) e estimador restrito de
+        \(\sigma^{2} (\hat{\sigma}_{r}^{2})\) visto em aula. Encontre
+        \(Var[\hat{\sigma}_{r}^{2}]\) e \(Var[\hat{\sigma}_{e}^{2}]\).
+        Na sua opinião, qual deles é melhor? Justifique.} \\
+
+\underline{Solução:}
+
+\[ \mathbf{y} = \beta_{0} + \bm{\epsilon}, \quad
+   \bm{\epsilon} \sim
+   N(\mathbf{0}, \sigma_{e}^{2}\mathbf{I}_{n \times n}) \]
+
+\begin{multicols}{2}
+EMV de \(\sigma_{e}^{2}\):
+
+\[ \hat{\sigma}_{e}^{2} =
+   \sum_{i = 1}^{n} \frac{(y_{i} - \hat{\beta_{0}})^{2}}{n} \]
+
+\begin{align*}
+ Var[\hat{\sigma}_{e}^{2}] & =
+ Var[\sum_{i = 1}^{n} \frac{(y_{i} - \hat{\beta_{0}})^{2}}{n}] \\ & =
+ \frac{1}{n^{2}} \sigma^{4} 2 (n - 1)
+\end{align*}
+
+\[ \boxed{Var[\hat{\sigma}_{e}^{2}] =
+          \frac{2 (n - 1)}{n^{2}} \sigma^{4}.} \]
+
+EMV restrito, \(\sigma_{r}^{2}\):
+
+\[ \hat{\sigma}_{r}^{2} =
+   \sum_{i = 1}^{n} \frac{(y_{i} - \hat{\beta_{0}})^{2}}{n - 1} \]
+
+\begin{align*}
+ Var[\hat{\sigma}_{r}^{2}] & =
+ Var[\sum_{i = 1}^{n} \frac{(y_{i} - \hat{\beta_{0}})^{2}}{n - 1}] \\
+ & = \frac{1}{(n - 1)^{2}} \sigma^{4} 2 (n - 1)
+\end{align*}
+
+\[ \boxed{Var[\hat{\sigma}_{r}^{2}] = \frac{2}{n - 1} \sigma^{4}.} \]
+\end{multicols}
+
+\begin{align*}
+ \frac{Var[\hat{\sigma}_{e}^{2}]}{Var[\hat{\sigma}_{r}^{2}]} & =
+ \frac{2 (n - 1)}{n^{2}} \sigma^{4} \cdot \frac{n - 1}{2 \sigma^{4}} \\
+ & = \frac{(n - 1)^{2}}{n^{2}} \\ & = \frac{n^{2} - 2n + 1}{n^{2}} \\
+ & = 1 - \frac{2}{n} + \frac{1}{n^{2}} \\ & = \leq 1.
+\end{align*}
+
+Portanto,
+\(\boxed{Var[\hat{\sigma}_{r}^{2}] > Var[\hat{\sigma}_{e}^{2}]}\). \\
+
+\(\hat{\sigma}_{e}^{2}\),
+\(E[\hat{\sigma}_{e}^{2}] = \frac{n - 1}{n} \sigma_{e}^{2}\), é um
+estimador viciado (corrigível), mas com menor variância que
+\(\hat{\sigma}_{r}^{2}\), \(E[\hat{\sigma}_{r}^{2}] = \sigma_{e}^{2}\).
+\\
+
+Logo, temos que
+\(\hat{\sigma}_{e}^{2}\) é melhor que \(\hat{\sigma}_{r}^{2}\).
+
+\section*{Exercício 2} \addcontentsline{toc}{section}{Exercício 2}
+
+\horrule{1pt} \\
+
+\textbf{Considere o modelo dado em (\ref{eq:exer1_1}). A partir da
+        perspectiva Bayesiana, considere as distribuições à priori de
+        \(\bm{\beta}\) e \(\sigma_{e}^{2}\) dados por
+        \(p(\bm{\beta}) \propto 1\) e
+        \(p(\sigma_{e}^{2}) \propto (\sigma_{e}^{2})^{-1}\),
+        respectivamente.}
+
+\subsection*{(a)} \addcontentsline{toc}{subsection}{(a)}
+
+\textbf{Seja \(\bm{\theta} = (\bm{\beta}^{'}, \sigma_{e}^{2})\).
+        Encontre a distribuição a posteriori de \(\bm{\theta}\).} \\
+
+\underline{Solução:} \\
+
+A distribuição a posteriori de \(\bm{\theta}\),
+\(\pi(\bm{\theta} | \mathbf{y})\), pelo teorema de Bayes é dada por:
+
+\[ \pi(\bm{\theta} | \mathbf{y}) \propto
+   L(\bm{\theta}; \mathbf{y}) \pi(\bm{\theta}). \]
+
+Assumindo independência entre \(\bm{\theta}\) e \(\sigma_{e}^{2}\), a
+distribuição a priori de \(\pi(\bm{\theta})\) é dada por:
+
+\[ \pi(\bm{\theta}) = \pi(\bm{\beta}, \sigma_{e}^{2}) =
+   \pi(\bm{\beta}) \pi(\sigma_{e}^{2}) \propto
+   1 \cdot \frac{1}{\sigma_{e}^{2}} = \frac{1}{\sigma_{e}^{2}}. \]
+
+Assim,
+
+\begin{align*}
+ \pi(\bm{\theta} | \mathbf{y}) & \propto
+ \frac{1}{(\sigma_{e}^{2})^{n/2}}
+ {\rm exp}\Big\{-\frac{1}{2\sigma_{e}^{2}}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})\Big\} \cdot
+ \frac{1}{\sigma_{e}^{2}} \\ & \propto
+ \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+ {\rm exp}\Big\{-\frac{1}{2\sigma_{e}^{2}}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})\Big\}.
+\end{align*}
+
+Sabemos que \(\hat{\bm{\beta}} =
+              (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{y}\)
+e \(\hat{\mathbf{y}} = \mathbf{X}\hat{\bm{\beta}}\), desta forma:
+
+\begin{align*}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta}) & =
+ (\mathbf{y} - \mathbf{X} \bm{\beta})^{'}
+ (\mathbf{y} - \mathbf{X} \bm{\beta})
+ - 2\mathbf{y}^{'}\hat{\mathbf{y}} + 2\mathbf{y}^{'}\hat{\mathbf{y}} \\
+ & = \mathbf{y}^{'}\mathbf{y} - 2\mathbf{y}\bm{\beta}^{'}\mathbf{X}^{'}
+     + \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+     - 2\mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}}
+     + 2\mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}} \\ & =
+ \mathbf{y}^{'}\mathbf{y} - 2\bm{\beta}^{'}\mathbf{X}^{'}
+ \mathbf{X}(\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{y}
+ + \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+ - 2\mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}}
+ + 2\mathbf{y}^{'}\mathbf{X}
+ (\mathbf{X}^{'}\mathbf{X})^{-1}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+ \\ & = \mathbf{y}^{'}\mathbf{y}
+        - 2\bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+        + \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+        - 2\mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}}
+        + 2\hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+ \\ & = \mathbf{y}^{'}\mathbf{y}
+        - \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+        - \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+        + \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+        - \mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}}
+        - \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{y}
+        + \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+        + \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+ \\ & = \mathbf{y}^{'}\mathbf{y}
+        - \mathbf{y}^{'}\mathbf{X}\hat{\bm{\beta}}
+        - \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{y}
+        + \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+        + \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+        - \bm{\beta}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+        - \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\bm{\beta}
+        + \hat{\bm{\beta}}^{'}\mathbf{X}^{'}\mathbf{X}\hat{\bm{\beta}}
+ \\ & = (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})^{'}
+        (\mathbf{y} - \mathbf{X} \hat{\bm{\beta}})
+        + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+          \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}}) \\
+ & = \frac{n - p}{n - p}
+     (\mathbf{y} - \hat{\mathbf{y}})^{'}(\mathbf{y} - \hat{\mathbf{y}})
+     + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+       \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}}) \\
+ & = \nu \mathbf{S}^{2} + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+     \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}}),
+\end{align*}
+
+com
+
+\[ \mathbf{S}^{2} =
+   \frac{
+    (\mathbf{y}-\hat{\mathbf{y}})^{'}(\mathbf{y}-\hat{\mathbf{y}})}{
+    \nu}, \quad \nu = n - p. \]
+
+Portanto,
+
+\[ \boxed{\pi(\bm{\theta} | \mathbf{y}) \propto
+    \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+    {\rm exp}\bigg\{-\frac{1}{2\sigma_{e}^{2}}
+    \Big[\nu \mathbf{S}^{2} + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+         \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})
+    \Big]\bigg\}}. \]
+
+\subsection*{(b)} \addcontentsline{toc}{subsection}{(b)}
+
+\textbf{Usando o item (a), encontre a distribuição a posteriori de
+        \(\sigma_{e}^{2}\).} \\
+
+\underline{Solução:}
+
+\vspace{-.18cm}
+
+\begin{align}
+\begin{split}
+ \pi(\sigma_{e}^{2}|\mathbf{y}) =
+ \int_{-\infty}^{\infty} \pi(\bm{\beta}, \sigma_{e}^{2}|\mathbf{y})
+                         {\rm d}\bm{\beta} & =
+ \int_{-\infty}^{\infty} \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+  {\rm exp}\bigg\{-\frac{1}{2\sigma_{e}^{2}}
+  \Big[\nu \mathbf{S}^{2} + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+  \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}}) \Big]\bigg\}
+ {\rm d}\bm{\beta} \\ & = \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}
+ \int_{-\infty}^{\infty} {\rm exp}\bigg\{-\frac{1}{2}
+  (\bm{\beta} - \hat{\bm{\beta}})^{'}
+  \frac{\mathbf{X}^{'}\mathbf{X}}{\sigma_{e}^{2}}
+  (\bm{\beta} - \hat{\bm{\beta}})\bigg\}{\rm d}\bm{\beta} \\ & =
+  \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}
+ (\sqrt{2\pi})^{p}
+ \bigg|\frac{(\mathbf{X}^{'}\mathbf{X})^{-1}}{\sigma_{e}^{2}}\bigg|^{1/2}
+ \\ & \propto \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}
+ (\sqrt{2\pi})^{p} \frac{1}{((\sigma_{e}^{2})^{2p})^{-1/2}} \\ & =
+ \frac{1}{(\sigma_{e}^{2})^{n/2 + 1 - p}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\} \\
+ & = \frac{1}{(\sigma_{e}^{2})^{n/2 + 1 - p/2}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}
+ \label{eq:2.b} \\ & = \frac{1}{(\sigma_{e}^{2})^{(n - p)/2 + 1}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\} =
+ \frac{1}{(\sigma_{e}^{2})^{\nu/2 + 1}}
+ {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}.
+\end{split}
+\end{align}
+
+Na equação (\ref{eq:2.b}) temos o núcleo de uma distribuição gama
+inversa, assim, a distribuição marginal a posteriori de
+\(\sigma_{e}^{2}\) é dada por:
+
+\[ \pi(\sigma_{e}^{2}|\mathbf{y}) =
+   \frac{\nu \mathbf{S}^{2}}{2 \Gamma(\nu/2)}
+   \Big(\frac{1}{\sigma_{e}^{2}}\Big)^{\nu/2 + 1}
+   {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2}}{2\sigma_{e}^{2}}\bigg\}, \]
+
+ou seja,
+
+\[ \pi(\sigma_{e}^{2}|\mathbf{y}) =
+   GInv\bigg(\frac{\nu}{2}, \frac{\nu \mathbf{S}^{2}}{2}\bigg). \]
+
+\subsection*{(c)} \addcontentsline{toc}{subsection}{(c)}
+
+\textbf{Usando o item (a), encontre a distribuição a posteriori de
+        \(\bm{\beta}\).} \\
+        
+\underline{Solução:}
+
+\[ \pi(\bm{\beta}|\mathbf{y}) =
+   \int_{0}^{\infty} \pi(\bm{\beta}, \sigma_{e}^{2}|\mathbf{y})
+   {\rm d}\sigma_{e}^{2} = \int_{0}^{\infty}
+   \frac{1}{(\sigma_{e}^{2})^{n/2 + 1}}
+   {\rm exp}\bigg\{-\frac{\nu \mathbf{S}^{2} +
+   (\bm{\beta} - \hat{\bm{\beta}})^{'}\mathbf{X}^{'}\mathbf{X}(\bm{\beta}
+   - \hat{\bm{\beta}})}{2\sigma_{e}^{2}} \bigg\}{\rm d}\sigma_{e}^{2}. \]
+
+Fazendo \(a = (\nu \mathbf{S}^{2} +
+(\bm{\beta} - \hat{\bm{\beta}})^{'}\mathbf{X}^{'}\mathbf{X}(\bm{\beta} -
+\hat{\bm{\beta}}))/2\), temos:
+
+\begin{align}
+\begin{split}
+ \pi(\bm{\beta}|\mathbf{y}) & = \int_{0}^{\infty}
+ (\sigma_{e}^{2})^{-(n/2 + 1)}
+ {\rm exp}\bigg\{-\frac{a}{\sigma_{e}^{2}}\bigg\}{\rm d}\sigma_{e}^{2} \\
+ & = \bigg(\frac{a}{2}\bigg)^{-n/2}\Gamma\bigg(\frac{n}{2}\bigg) \\
+ & = \bigg[\frac{\nu \mathbf{S}^{2} + (\bm{\beta} - \hat{\bm{\beta}})^{'}
+     \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})}{2}
+     \bigg]^{n/2} \Gamma\bigg(\frac{n}{2}\bigg) \\ & = \Gamma
+ \bigg(\frac{\nu + p}{2}\bigg) 2^{n/2} \bigg\{\nu\mathbf{S}^{2}\bigg[
+ 1 + \frac{(\bm{\beta} - \hat{\bm{\beta}})^{'}
+ \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})}{
+ \nu\mathbf{S}^{2}}\bigg]\bigg\}^{-(1/2)(\nu + p)} \\ & = \Gamma
+ \bigg(\frac{\nu + p}{2}\bigg) {\nu\mathbf{S}^{2}}^{-(1/2)(\nu + p)}
+ \bigg[1 + \frac{(\bm{\beta} - \hat{\bm{\beta}})^{'}
+ \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})}{
+ \nu\mathbf{S}^{2}}\bigg]^{-(1/2)(\nu + p)} \label{eq:2.c} \\ & \propto
+ \Gamma\bigg(\frac{1}{2}(\nu + p)\bigg) \nu^{-p/2}\mathbf{S}^{-p}
+ \bigg[1 + \frac{(\bm{\beta} - \hat{\bm{\beta}})^{'}
+ \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})}{
+ \nu\mathbf{S}^{2}}\bigg]^{-(1/2)(\nu + p)}.
+\end{split}
+\end{align}
+
+Na equação (\ref{eq:2.c}) temos o núcleo de uma distribuição \textit{t}-
+Student multivariada, assim, a distribuição marginal a posteriori de
+\(\bm{\beta}\) é dada por:
+
+\[ \pi(\bm{\beta}|\mathbf{Y}) =
+   \frac{\Gamma [(1/2)(\nu + p)]|\mathbf{X}^{'}\mathbf{X}|^{1/2}
+         \mathbf{S}^{-p}}{\Gamma(1/2)^{-p}\Gamma((1/2)\nu)
+                          (\sqrt{\nu})^{p}}
+   \bigg[1 + \frac{(\bm{\beta} - \hat{\bm{\beta}})^{'}
+   \mathbf{X}^{'}\mathbf{X}(\bm{\beta} - \hat{\bm{\beta}})}{
+   \nu\mathbf{S}^{2}}\bigg]^{-(1/2)(\nu + p)}, \]
+
+que se denota por \(t_{p}(\hat{\bm{\beta}},
+\mathbf{S}^{2}(\mathbf{X}^{'}\mathbf{X})^{-1}, \nu)\).
+
+\subsection*{(d)} \addcontentsline{toc}{subsection}{(d)}
+
+\textbf{Supondo que fosse necessário apontar um estimador pontual
+        Bayesiano para \(\bm{\beta}\), quem você apontaria?} \\
+
+\underline{Solução:} \\
+
+Cada parâmetro \(\beta_{i}, i = 0, 1, ..., p\) tem distribuição,
+
+\[ \pi(\beta_{i}|\mathbf{Y}) = t(\nu, \hat{\beta}_{i}, h_{ii}), \]
+
+\textit{t}-Student univariada com \(\nu\) graus de liberdade, parâmetro
+de posição \(\hat{\beta}\) e parâmetro de escala \(h_{ii}\) que é o
+elemento \((i, i)\) de \(\mathbf{S}^{2}(\mathbf{X}^{'}\mathbf{X})^{-1}\).
+\\
+
+Como a distribuição é uma \textit{t}-Student, um estimador pontual não
+viciado bom seria a média desta \textit{t}-Student:
+
+\[ \hat{\bm{\beta}} =
+   (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}. \]
+
+\section*{Exercício 3} \addcontentsline{toc}{section}{Exercício 3}
+
+\horrule{1pt} \\
+
+\textbf{Compare o EMV de \(\bm{\beta}\) e a média da distribuição à
+        posteriori de \(\bm{\beta}\) em termos de suas respectivas
+        variâncias, indicando qual deles seria mais apropriado.} \\
+
+\underline{Solução:} \\
+
+Como visto anteriormente,
+
+\begin{multicols}{2}
+ \[ Var[\hat{\bm{\beta}}_{EMV}] =
+    \mathbf{S}^{2} (\mathbf{X}^{'} \mathbf{X})^{-1}. \] \\
+
+\columnbreak
+
+Distribuição à posteriori de \(\bm{\beta}\): \\
+
+Como \(\pi(\beta_{i}|\mathbf{Y}) = t(\nu, \hat{\beta}_{i}, h_{ii})\),
+
+\[ Var[\hat{\bm{\beta}}] =
+   \frac{n-p}{n-p-2} \mathbf{S}^{2} (\mathbf{X}^{'} \mathbf{X})^{-1}. \]
+\end{multicols}
+
+Assim,
+
+\begin{align*}
+ \mathbf{S}^{2} (\mathbf{X}^{'} \mathbf{X})^{-1} & <
+ \frac{n - p}{n - p - 2} \mathbf{S}^{2} (\mathbf{X}^{'} \mathbf{X})^{-1}
+ \\ 1 & < \frac{n - p}{n - p - 2}.
+\end{align*}
+
+\(\hat{\bm{\beta}}_{EMV}\) tem menor variância. Contudo, apesar de sermos
+capazes de calcular a esperança e a variância de \(\bm{\beta}\) por EMV,
+não conhecemos sua distribuição. Já a partir da perspectiva bayesiana
+somos capazes de conhecer sua distribuição a posteriori. Portanto, sob
+esse ponto de visto, em situações de amostra pequena ou que seja de
+interesse a distribuição de \(\bm{\beta}\), a utilização da perspectiva
+bayesiana é mais apropriada.
+\hfill \(\blacksquare\)
+
+% \horrule{.5pt}
+
+% \vspace{\fill}
+
+ %\horrule{1pt} % \\
+
+\end{document}
