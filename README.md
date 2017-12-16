@@ -1,4 +1,4 @@
-# MI404 - Statistical Methods
+# MI404 - Statistical methods
 
 ***
 
