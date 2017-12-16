@@ -1,11 +1,11 @@
-# MI404 - Statistical methods
+# mi404 - Statistical methods
 
 ***
 
 **Master's degree in [Statistics](https://www.ime.unicamp.br/) at
   [UNICAMP](http://www.unicamp.br/unicamp/).**
 
-**Discipline: MI404 - Statistical Methods**
+**Couse: mi404 - Statistical methods**
 
 Professor: [**Prof. PhD Mariana Rodrigues Motta**](http://www.ime.unicamp.br/~marianar/)
 
@@ -13,5 +13,5 @@ Professor: [**Prof. PhD Mariana Rodrigues Motta**](http://www.ime.unicamp.br/~ma
 
 [**Assignment for test 1**](http://mynameislaure.github.io/mi404/p1.pdf)
 
-[**Exercises list**](http://mynameislaure.github.io/mi404/exer_2.pdf)
+[**Exercise list**](http://mynameislaure.github.io/mi404/exer_2.pdf)
 ***
